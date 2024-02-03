@@ -1,8 +1,10 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import type { Metadata } from 'next'
+
+import './globals.css'
+import { GiRoundTable } from "react-icons/gi";
+// import { useState } from 'react';
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,9 +16,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // const [time, setTime] = useState<string>()
+  let time: string = ""
+  const getTime = () => {
+    const date = new Date();
+    const showTime: string = date.getHours()
+      + ' นาฬิกา ' + date.getMinutes()
+      + " นาที "
+    time = showTime
+
+
+  }
+  getTime()
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className='bg-white' >
+        <nav className="navbar bg-blue-400 sticky top-0 flex justify-between">
+          <div className=" w-12 h-12 ">
+            <GiRoundTable style={{ fontSize: '4rem', margin: "0 auto" }} className="text-white" />
+          </div>
+          <p className='text-white'>ข้อมูล ณ เวลา {time}</p>
+        </nav>
+        {children}</body>
     </html>
   )
 }
